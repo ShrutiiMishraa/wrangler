@@ -199,6 +199,16 @@ identifierList
 /*
  * Following are the Lexer Rules used for tokenizing the recipe.
  */
+// Add these rules under lexer rules
+fragment DIGIT : [0-9];
+fragment BYTE_UNIT : 'B' | 'KB' | 'MB' | 'GB';
+fragment TIME_UNIT : 'ms' | 's' | 'm' | 'h';
+
+BYTE_SIZE : DIGIT+ BYTE_UNIT;
+TIME_DURATION : DIGIT+ TIME_UNIT;
+
+// Update parser rules (e.g., add to `value` rule)
+value : ... | BYTE_SIZE | TIME_DURATION;
 OBrace   : '{';
 CBrace   : '}';
 SColon   : ';';
